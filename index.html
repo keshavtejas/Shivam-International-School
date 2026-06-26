@@ -32,6 +32,7 @@
             color: var(--text-color);
             line-height: 1.6;
             background-color: var(--white);
+            overflow-x: hidden;
         }
 
         /* Navigation Bar */
@@ -109,18 +110,48 @@
             color: var(--primary-color);
         }
 
+        /* Mobile Menu Toggle Button */
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--secondary-color);
+        }
+
+        /* Dynamic Greeting Badge Style */
+        .greeting-badge {
+            background-color: rgba(255, 59, 0, 0.2);
+            border: 1px solid var(--primary-color);
+            color: #fff;
+            padding: 6px 20px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: inline-block;
+            backdrop-filter: blur(5px);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
         /* Hero / Home Section */
         .hero {
             margin-top: 75px;
             padding: 140px 20px;
             text-align: center;
-            background: linear-gradient(rgba(17, 17, 17, 0.7), rgba(11, 11, 11, 0.6)), url('hero-bg.jpg') no-repeat center center/cover;
+            background: linear-gradient(rgba(17, 17, 17, 0.75), rgba(11, 11, 11, 0.65)), url('hero-bg.jpg') no-repeat center center/cover;
             color: var(--white);
             min-height: 85vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            transition: background 1s ease-in-out;
         }
 
         .hero h1 {
@@ -242,7 +273,7 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
         }
-<img src="Picsart_24-10-20_14-56-10-486.jpg" 
+
         .gallery-item {
             overflow: hidden;
             border-radius: 12px;
@@ -320,6 +351,32 @@
             resize: vertical;
         }
 
+        /* Interactive Music Button */
+        .music-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: 2px solid var(--primary-color);
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            z-index: 2000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.05);
+            background-color: var(--primary-color);
+        }
+
         /* Footer */
         footer {
             background-color: var(--secondary-color);
@@ -335,8 +392,24 @@
 
         /* Responsive Design for Mobile */
         @media (max-width: 768px) {
+            .menu-toggle {
+                display: block; /* मोबाइल में हैमबर्गर बटन दिखेगा */
+            }
             nav ul {
-                display: none; /* मोबाइल में टॉप मेनू हाइड रहेगा */
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 75px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                gap: 15px;
+                text-align: center;
+            }
+            nav ul.active {
+                display: flex;
             }
             .hero h1 {
                 font-size: 2.2rem;
@@ -355,20 +428,28 @@
 </head>
 <body>
 
+    <!-- AUDIO ELEMENT FOR MUSIC FEATURE -->
+    <audio id="schoolMusic" loop src="https://assets.mixkit.co/active_storage/sfx/123/123.wav"></audio>
+
+    <!-- INTERACTIVE MUSIC BUTTON -->
+    <button class="music-btn" onclick="toggleMusic()">
+        <span id="music-icon">🔔</span> <span id="music-text">Play Bell</span>
+    </button>
+
     <!-- HEADER / NAVIGATION -->
     <header>
         <div class="nav-container">
             <div class="logo-area">
-                <!-- 🔄 गिटहब पर अपलोडेड लोगो का सही नाम यहाँ लिखें -->
                 <img src="logo.jpg" alt="Shivam International School Logo">
                 <div class="logo-text">SHIVAM <span>INTERNATIONAL</span></div>
             </div>
+            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
             <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#services">Facilities</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                <ul id="nav-links">
+                    <li><a href="#home" onclick="toggleMenu()">Home</a></li>
+                    <li><a href="#services" onclick="toggleMenu()">Facilities</a></li>
+                    <li><a href="#gallery" onclick="toggleMenu()">Gallery</a></li>
+                    <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -376,7 +457,9 @@
 
     <!-- HOME / HERO SECTION -->
     <section id="home" class="hero">
-        <!-- मुख्य बैनर इमेज 'hero-bg.jpg' को आप गिटहब पर अपलोड कर के बदल सकते हैं -->
+        <!-- AUTOMATIC TIME GREETING BADGE -->
+        <div class="greeting-badge" id="dynamic-greeting">Loading Greeting...</div>
+        
         <h1>Shivam International School</h1>
         <p>शिक्षा और अनुशासन के माध्यम से उज्ज्वल भविष्य का निर्माण। हमारे यहाँ अत्याधुनिक सुविधाओं के साथ बच्चों का सर्वांगीण विकास किया जाता है।</p>
         <a href="#contact" class="btn">Admission Open - Contact Us</a>
@@ -400,6 +483,7 @@
             </div>
             <!-- कार्ड 3 -->
             <div class="service-card">
+                <div class="icon-box">🧘</div>
                 <h3>Sports & Yoga</h3>
                 <p>बच्चों के शारीरिक और मानसिक स्वास्थ्य के विकास के लिए खेलकूद, दौड़ और सुबह के योग की विशेष व्यवस्था।</p>
             </div>
@@ -411,7 +495,6 @@
         <section id="gallery">
             <h2 class="section-title">School <span>Gallery</span></h2>
             <div class="gallery-grid">
-                <!-- 🔄 यहाँ आप अपनी गिटहब पर अपलोड की गई 6 फोटोज़ के नाम बदल सकते हैं -->
                 <div class="gallery-item">
                     <img src="sir.jpg" alt="School Event 1">
                     <div class="gallery-caption">Annual Function / एनुअल फंक्शन</div>
@@ -445,8 +528,6 @@
         <h2 class="section-title">Contact <span>Us</span></h2>
         <div class="contact-container">
             <form action="https://api.web3forms.com/submit" method="POST">
-                
-                <!-- फॉर्म चालू करने के लिए अपनी Web3Forms की Key यहाँ डालें -->
                 <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
 
                 <div class="form-group">
@@ -472,5 +553,55 @@
         <p style="font-size: 0.85rem; margin-top: 12px; color: #ff7b54; font-weight: 600;">Contact no:- 6203332008 & 8252426059</p>
     </footer>
 
+    <!-- DYNAMIC JAVASCRIPT FOR PROFESSIONAL LOGIC -->
+    <script>
+        // 1. AUTOMATIC TIME GREETING LOGIC
+        function setDynamicGreeting() {
+            const hours = new Date().getHours();
+            const greetingElement = document.getElementById('dynamic-greeting');
+            let statusText = "";
+
+            if (hours >= 5 && hours < 12) {
+                statusText = "Good Morning! Welcome to Shivam International School ☀️";
+            } else if (hours >= 12 && hours < 16) {
+                statusText = "Good Afternoon! Welcome to Shivam International School 🌤️";
+            } else if (hours >= 16 && hours < 22) {
+                statusText = "Good Evening! Welcome to Shivam International School 🌆";
+            } else {
+                statusText = "Welcome to Shivam International School 🌙";
+            }
+            greetingElement.innerText = statusText;
+        }
+
+        // 2. INTERACTIVE MUSIC LOGIC
+        function toggleMusic() {
+            const audio = document.getElementById('schoolMusic');
+            const icon = document.getElementById('music-icon');
+            const text = document.getElementById('music-text');
+
+            if (audio.paused) {
+                audio.play().catch(e => console.log("Audio playback interactive restriction handled."));
+                icon.innerText = "🎵";
+                text.innerText = "Mute Music";
+            } else {
+                audio.pause();
+                icon.innerText = "🔔";
+                text.innerText = "Play Bell";
+            }
+        }
+
+        // 3. MOBILE MENU TOGGLE
+        function toggleMenu() {
+            const navLinks = document.getElementById('nav-links');
+            if(window.innerWidth <= 768) {
+                navLinks.classList.toggle('active');
+            }
+        }
+
+        // Run functions on load
+        window.onload = function() {
+            setDynamicGreeting();
+        }
+    </script>
 </body>
 </html>
