@@ -7,11 +7,11 @@
     <!-- Google Fonts for Premium Typography -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS STYLES - डिजाइन और मोबाइल रिस्पॉन्सिवनेस */
+        /* CSS STYLES */
         :root {
-            --primary-color: #ff3b00; /* फ़ाइल 14324.jpg के लोगो जैसा शानदार ऑरेंज रंग */
-            --secondary-color: #111111; /* डार्क ब्लैक */
-            --light-bg: #fdfaf7; /* हल्का ऑरेंज-व्हाइट बैकग्राउंड टोन */
+            --primary-color: #ff3b00; 
+            --secondary-color: #111111; 
+            --light-bg: #fdfaf7; 
             --white: #ffffff;
             --text-color: #333333;
             --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
@@ -61,7 +61,7 @@
         }
 
         .logo-area img {
-            height: 55px; /* लोगो के लिए बिल्कुल परफेक्ट साइज */
+            height: 55px; 
             width: auto;
         }
 
@@ -110,7 +110,6 @@
             color: var(--primary-color);
         }
 
-        /* Mobile Menu Toggle Button */
         .menu-toggle {
             display: none;
             font-size: 1.8rem;
@@ -118,25 +117,34 @@
             color: var(--secondary-color);
         }
 
-        /* Dynamic Greeting Badge Style */
-        .greeting-badge {
-            background-color: rgba(255, 59, 0, 0.2);
-            border: 1px solid var(--primary-color);
-            color: #fff;
-            padding: 6px 20px;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 15px;
+        /* LIVE CLOCK & GREETING CONTAINER */
+        .dynamic-panel {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            color: white;
             display: inline-block;
-            backdrop-filter: blur(5px);
-            animation: pulse 2s infinite;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        .greeting-badge {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        .live-clock {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.9;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 3px 15px;
+            border-radius: 50px;
+            display: inline-block;
         }
 
         /* Hero / Home Section */
@@ -144,15 +152,22 @@
             margin-top: 75px;
             padding: 140px 20px;
             text-align: center;
-            background: linear-gradient(rgba(17, 17, 17, 0.75), rgba(11, 11, 11, 0.65)), url('hero-bg.jpg') no-repeat center center/cover;
+            /* डिफ़ॉल्ट बैकग्राउंड */
+            background: linear-gradient(rgba(17, 17, 17, 0.7), rgba(11, 11, 11, 0.6)), url('hero-bg.jpg') no-repeat center center/cover;
             color: var(--white);
             min-height: 85vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: background 1s ease-in-out;
+            transition: all 0.8s ease;
         }
+
+        /* Dynamic Time Themes for Hero Section */
+        .hero.theme-morning { background: linear-gradient(rgba(239, 142, 56, 0.65), rgba(17, 17, 17, 0.85)), url('hero-bg.jpg') no-repeat center center/cover; }
+        .hero.theme-afternoon { background: linear-gradient(rgba(41, 128, 185, 0.6), rgba(11, 11, 11, 0.8)), url('hero-bg.jpg') no-repeat center center/cover; }
+        .hero.theme-evening { background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(253, 116, 108, 0.7)), url('hero-bg.jpg') no-repeat center center/cover; }
+        .hero.theme-night { background: linear-gradient(rgba(15, 32, 39, 0.8), rgba(32, 58, 67, 0.85)), url('hero-bg.jpg') no-repeat center center/cover; }
 
         .hero h1 {
             font-size: 3.5rem;
@@ -176,7 +191,7 @@
             color: var(--white);
             padding: 14px 35px;
             text-decoration: none;
-            border-radius: 50px; /* मॉडर्न कैप्सूल बटन */
+            border-radius: 50px; 
             font-weight: 600;
             letter-spacing: 0.5px;
             box-shadow: 0 5px 15px rgba(255, 59, 0, 0.3);
@@ -351,20 +366,26 @@
             resize: vertical;
         }
 
-        /* Interactive Music Button */
-        .music-btn {
+        /* Interactive Widgets */
+        .interactive-controls {
             position: fixed;
             bottom: 25px;
             right: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 2000;
+        }
+
+        .music-btn, .theme-btn {
             background-color: var(--secondary-color);
             color: white;
             border: 2px solid var(--primary-color);
-            padding: 12px 20px;
+            padding: 10px 18px;
             border-radius: 50px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             cursor: pointer;
-            z-index: 2000;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             display: flex;
             align-items: center;
@@ -372,7 +393,7 @@
             transition: all 0.3s;
         }
 
-        .music-btn:hover {
+        .music-btn:hover, .theme-btn:hover {
             transform: scale(1.05);
             background-color: var(--primary-color);
         }
@@ -393,7 +414,7 @@
         /* Responsive Design for Mobile */
         @media (max-width: 768px) {
             .menu-toggle {
-                display: block; /* मोबाइल में हैमबर्गर बटन दिखेगा */
+                display: block;
             }
             nav ul {
                 display: none;
@@ -428,13 +449,18 @@
 </head>
 <body>
 
-    <!-- AUDIO ELEMENT FOR MUSIC FEATURE -->
+    <!-- AUDIO FOR BELL/MUSIC -->
     <audio id="schoolMusic" loop src="https://assets.mixkit.co/active_storage/sfx/123/123.wav"></audio>
 
-    <!-- INTERACTIVE MUSIC BUTTON -->
-    <button class="music-btn" onclick="toggleMusic()">
-        <span id="music-icon">🔔</span> <span id="music-text">Play Bell</span>
-    </button>
+    <!-- FLOATING INTERACTIVE CONTROLS -->
+    <div class="interactive-controls">
+        <button class="theme-btn" onclick="changeTestTheme()">
+            <span>🔄</span> Test Next Theme
+        </button>
+        <button class="music-btn" onclick="toggleMusic()">
+            <span id="music-icon">🔔</span> <span id="music-text">Play Bell</span>
+        </button>
+    </div>
 
     <!-- HEADER / NAVIGATION -->
     <header>
@@ -457,8 +483,11 @@
 
     <!-- HOME / HERO SECTION -->
     <section id="home" class="hero">
-        <!-- AUTOMATIC TIME GREETING BADGE -->
-        <div class="greeting-badge" id="dynamic-greeting">Loading Greeting...</div>
+        <!-- LIVE DIGITAL PANEL -->
+        <div class="dynamic-panel">
+            <div class="greeting-badge" id="dynamic-greeting">Loading Greeting...</div>
+            <div class="live-clock" id="live-clock">00:00:00 AM</div>
+        </div>
         
         <h1>Shivam International School</h1>
         <p>शिक्षा और अनुशासन के माध्यम से उज्ज्वल भविष्य का निर्माण। हमारे यहाँ अत्याधुनिक सुविधाओं के साथ बच्चों का सर्वांगीण विकास किया जाता है।</p>
@@ -469,19 +498,16 @@
     <section id="services">
         <h2 class="section-title">Our <span>Facilities</span></h2>
         <div class="services-grid">
-            <!-- कार्ड 1 -->
             <div class="service-card">
                 <div class="icon-box">🖥️</div>
                 <h3>Smart Classrooms</h3>
                 <p>आधुनिक तकनीक और स्मार्ट प्रोजेक्टर के माध्यम से बच्चों को आसानी से डिजिटल विजुअल्स द्वारा पाठ समझाना।</p>
             </div>
-            <!-- कार्ड 2 -->
             <div class="service-card">
                 <div class="icon-box">🔬</div>
                 <h3>Science & Computer Lab</h3>
                 <p>प्रैक्टिकल ज्ञान को बढ़ावा देने के लिए पूरी तरह से आधुनिक कंप्यूटर और विज्ञान प्रयोगशाला की सुविधा।</p>
             </div>
-            <!-- कार्ड 3 -->
             <div class="service-card">
                 <div class="icon-box">🧘</div>
                 <h3>Sports & Yoga</h3>
@@ -529,7 +555,6 @@
         <div class="contact-container">
             <form action="https://api.web3forms.com/submit" method="POST">
                 <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
-
                 <div class="form-group">
                     <label for="name">आपका नाम (Name)</label>
                     <input type="text" id="name" name="name" placeholder="अपना पूरा नाम लिखें" required>
@@ -553,34 +578,68 @@
         <p style="font-size: 0.85rem; margin-top: 12px; color: #ff7b54; font-weight: 600;">Contact no:- 6203332008 & 8252426059</p>
     </footer>
 
-    <!-- DYNAMIC JAVASCRIPT FOR PROFESSIONAL LOGIC -->
+    <!-- DYNAMIC JAVASCRIPT -->
     <script>
-        // 1. AUTOMATIC TIME GREETING LOGIC
-        function setDynamicGreeting() {
-            const hours = new Date().getHours();
-            const greetingElement = document.getElementById('dynamic-greeting');
-            let statusText = "";
+        let testCurrentThemeIndex = -1;
+        const themes = ['morning', 'afternoon', 'evening', 'night'];
 
-            if (hours >= 5 && hours < 12) {
-                statusText = "Good Morning! Welcome to Shivam International School ☀️";
-            } else if (hours >= 12 && hours < 16) {
-                statusText = "Good Afternoon! Welcome to Shivam International School 🌤️";
-            } else if (hours >= 16 && hours < 22) {
-                statusText = "Good Evening! Welcome to Shivam International School 🌆";
-            } else {
-                statusText = "Welcome to Shivam International School 🌙";
+        // 1. LIVE CLOCK & AUTO THEME LOGIC
+        function updateDynamicPanel() {
+            const now = new Date();
+            
+            // Live Time String Format
+            let timeString = now.toLocaleTimeString('en-US', { hour12: true });
+            document.getElementById('live-clock').innerText = "Live: " + timeString;
+
+            // Run Auto Theme ONLY if User hasn't clicked "Test Next Theme" button manually
+            if (testCurrentThemeIndex === -1) {
+                const hours = now.getHours();
+                const greetingElement = document.getElementById('dynamic-greeting');
+                const heroSection = document.getElementById('home');
+                
+                // Reset existing theme classes
+                heroSection.className = "hero";
+
+                if (hours >= 5 && hours < 12) {
+                    greetingElement.innerText = "Good Morning! Welcome to Shivam International School ☀️";
+                    heroSection.classList.add('theme-morning');
+                } else if (hours >= 12 && hours < 16) {
+                    greetingElement.innerText = "Good Afternoon! Welcome to Shivam International School 🌤️";
+                    heroSection.classList.add('theme-afternoon');
+                } else if (hours >= 16 && hours < 22) {
+                    greetingElement.innerText = "Good Evening! Welcome to Shivam International School 🌆";
+                    heroSection.classList.add('theme-evening');
+                } else {
+                    greetingElement.innerText = "Welcome to Shivam International School 🌙";
+                    heroSection.classList.add('theme-night');
+                }
             }
-            greetingElement.innerText = statusText;
         }
 
-        // 2. INTERACTIVE MUSIC LOGIC
+        // 2. MANUAL THEME CHANGER BUTTON FOR TESTING
+        function changeTestTheme() {
+            testCurrentThemeIndex = (testCurrentThemeIndex + 1) % themes.length;
+            const chosenTheme = themes[testCurrentThemeIndex];
+            const greetingElement = document.getElementById('dynamic-greeting');
+            const heroSection = document.getElementById('home');
+            
+            heroSection.className = "hero";
+            heroSection.classList.add('theme-' + chosenTheme);
+
+            if (chosenTheme === 'morning') greetingElement.innerText = "Testing: Good Morning Theme ☀️";
+            if (chosenTheme === 'afternoon') greetingElement.innerText = "Testing: Good Afternoon Theme 🌤️";
+            if (chosenTheme === 'evening') greetingElement.innerText = "Testing: Good Evening Theme 🌆";
+            if (chosenTheme === 'night') greetingElement.innerText = "Testing: Night Theme 🌙";
+        }
+
+        // 3. INTERACTIVE MUSIC LOGIC
         function toggleMusic() {
             const audio = document.getElementById('schoolMusic');
             const icon = document.getElementById('music-icon');
             const text = document.getElementById('music-text');
 
             if (audio.paused) {
-                audio.play().catch(e => console.log("Audio playback interactive restriction handled."));
+                audio.play().catch(e => console.log("Audio play blocked by browser settings until click."));
                 icon.innerText = "🎵";
                 text.innerText = "Mute Music";
             } else {
@@ -590,7 +649,7 @@
             }
         }
 
-        // 3. MOBILE MENU TOGGLE
+        // 4. MOBILE MENU TOGGLE
         function toggleMenu() {
             const navLinks = document.getElementById('nav-links');
             if(window.innerWidth <= 768) {
@@ -598,10 +657,9 @@
             }
         }
 
-        // Run functions on load
-        window.onload = function() {
-            setDynamicGreeting();
-        }
+        // Start Intervals
+        setInterval(updateDynamicPanel, 1000);
+        window.onload = updateDynamicPanel;
     </script>
 </body>
 </html>
