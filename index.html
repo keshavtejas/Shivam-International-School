@@ -9,11 +9,12 @@
     <style>
         /* CSS STYLES - डिजाइन और मोबाइल रिस्पॉन्सिवनेस */
         :root {
-            --primary-color: #a31d1d; /* इमेज 14333.jpg जैसा मैरून/लाल रंग */
-            --secondary-color: #1a1a1a; /* डार्क ब्लैक */
-            --light-bg: #f9f9f9;
+            --primary-color: #ff3b00; /* फ़ाइल 14324.jpg के लोगो जैसा शानदार ऑरेंज रंग */
+            --secondary-color: #111111; /* डार्क ब्लैक */
+            --light-bg: #fdfaf7; /* हल्का ऑरेंज-व्हाइट बैकग्राउंड टोन */
             --white: #ffffff;
             --text-color: #333333;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
 
         * {
@@ -36,7 +37,7 @@
         /* Navigation Bar */
         header {
             background-color: var(--white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
             position: fixed;
             width: 100%;
             top: 0;
@@ -49,37 +50,59 @@
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 15px 20px;
+            padding: 12px 20px;
         }
 
         .logo-area {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .logo-area img {
-            height: 50px; /* आपके लोगो (14332.jpg) का साइज */
+            height: 55px; /* लोगो के लिए बिल्कुल परफेक्ट साइज */
             width: auto;
         }
 
         .logo-text {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: var(--secondary-color);
+            letter-spacing: 0.5px;
+        }
+
+        .logo-text span {
+            color: var(--primary-color);
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 25px;
+            gap: 30px;
         }
 
         nav ul a {
             text-decoration: none;
             color: var(--secondary-color);
             font-weight: 600;
+            font-size: 0.95rem;
             transition: color 0.3s;
+            position: relative;
+        }
+
+        nav ul a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s;
+        }
+
+        nav ul a:hover::after {
+            width: 100%;
         }
 
         nav ul a:hover {
@@ -88,13 +111,12 @@
 
         /* Hero / Home Section */
         .hero {
-            margin-top: 80px;
-            padding: 100px 20px;
+            margin-top: 75px;
+            padding: 140px 20px;
             text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('hero-bg.jpg') no-repeat center center/cover;
-            /* नोट: ऊपर 'hero-bg.jpg' को आप अपनी मुख्य स्कूल फोटो से बदल सकते हैं */
+            background: linear-gradient(rgba(17, 17, 17, 0.7), rgba(11, 11, 11, 0.6)), url('hero-bg.jpg') no-repeat center center/cover;
             color: var(--white);
-            min-height: 80vh;
+            min-height: 85vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -102,138 +124,199 @@
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 20px;
             font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
         }
 
         .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin-bottom: 30px;
+            font-size: 1.25rem;
+            max-width: 750px;
+            margin-bottom: 35px;
+            font-weight: 300;
+            opacity: 0.95;
         }
 
         .btn {
             background-color: var(--primary-color);
             color: var(--white);
-            padding: 12px 30px;
+            padding: 14px 35px;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 50px; /* मॉडर्न कैप्सूल बटन */
             font-weight: 600;
-            transition: background 0.3s;
+            letter-spacing: 0.5px;
+            box-shadow: 0 5px 15px rgba(255, 59, 0, 0.3);
+            transition: all 0.3s ease;
             border: none;
             cursor: pointer;
         }
 
         .btn:hover {
-            background-color: #801414;
+            background-color: #cc2f00;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 59, 0, 0.4);
         }
 
         /* Global Section Styles */
         section {
-            padding: 80px 20px;
+            padding: 90px 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.2rem;
-            color: var(--primary-color);
-            margin-bottom: 50px;
-            position: relative;
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 60px;
             font-weight: 700;
+        }
+
+        .section-title span {
+            color: var(--primary-color);
         }
 
         .section-title::after {
             content: '';
             display: block;
-            width: 60px;
+            width: 70px;
             height: 4px;
-            background-color: var(--secondary-color);
-            margin: 10px auto 0;
+            background-color: var(--primary-color);
+            margin: 12px auto 0;
+            border-radius: 2px;
         }
 
-        /* Services / Facilities Section */
+        /* Facilities Section */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
         .service-card {
-            background-color: var(--light-bg);
-            padding: 30px;
-            border-radius: 8px;
+            background-color: var(--white);
+            padding: 40px 30px;
+            border-radius: 12px;
             text-align: center;
-            border-top: 5px solid var(--primary-color);
-            transition: transform 0.3s;
+            box-shadow: var(--card-shadow);
+            border-bottom: 4px solid #eee;
+            transition: all 0.3s ease;
         }
 
         .service-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            border-bottom-color: var(--primary-color);
+            box-shadow: 0 15px 35px rgba(255, 59, 0, 0.1);
+        }
+
+        .service-card .icon-box {
+            width: 70px;
+            height: 70px;
+            background-color: var(--light-bg);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 25px;
+            font-size: 1.8rem;
+            color: var(--primary-color);
         }
 
         .service-card h3 {
             margin-bottom: 15px;
+            font-size: 1.35rem;
             color: var(--secondary-color);
         }
 
         /* Gallery Section */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+        .gallery-section-wrapper {
+            background-color: var(--light-bg);
+            width: 100%;
         }
 
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+<img src="Picsart_24-10-20_14-56-10-486.jpg" 
         .gallery-item {
             overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            height: 200px;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            height: 240px;
+            background-color: #ddd;
+            position: relative;
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s;
+            transition: transform 0.5s ease;
         }
 
-        .gallery-item img:hover {
-            transform: scale(1.05);
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: var(--white);
+            font-size: 0.95rem;
+            font-weight: 600;
         }
 
         /* Contact Section */
         .contact-container {
-            max-width: 600px;
+            max-width: 650px;
             margin: 0 auto;
-            background-color: var(--light-bg);
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            background-color: var(--white);
+            padding: 45px;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #f0f0f0;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: 600;
+            color: var(--secondary-color);
+            font-size: 0.9rem;
         }
 
         .form-group input, .form-group textarea {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            padding: 14px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
             font-size: 1rem;
+            background-color: #fafafa;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background-color: var(--white);
+            box-shadow: 0 0 0 4px rgba(255, 59, 0, 0.1);
         }
 
         .form-group textarea {
-            height: 120px;
+            height: 130px;
             resize: vertical;
         }
 
@@ -242,23 +325,30 @@
             background-color: var(--secondary-color);
             color: var(--white);
             text-align: center;
-            padding: 30px 20px;
-            margin-top: 50px;
+            padding: 40px 20px;
         }
 
-        /* Responsive Design for Mobile (मोबाइल के लिए सेटिंग्स) */
+        footer p {
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Design for Mobile */
         @media (max-width: 768px) {
             nav ul {
-                display: none; /* मोबाइल में मेनू को सिंपल रखने के लिए */
+                display: none; /* मोबाइल में टॉप मेनू हाइड रहेगा */
             }
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             .hero p {
                 font-size: 1rem;
             }
             .section-title {
-                font-size: 1.8rem;
+                font-size: 2rem;
+            }
+            .contact-container {
+                padding: 25px;
             }
         }
     </style>
@@ -269,9 +359,9 @@
     <header>
         <div class="nav-container">
             <div class="logo-area">
-                <!-- 🔄 अपने लोगो का नाम यहाँ बदलें (जैसे shivam-logo.jpg) -->
+                <!-- 🔄 गिटहब पर अपलोडेड लोगो का सही नाम यहाँ लिखें -->
                 <img src="14332.jpg" alt="Shivam International School Logo">
-                <div class="logo-text">SHIVAM</div>
+                <div class="logo-text">SHIVAM <span>INTERNATIONAL</span></div>
             </div>
             <nav>
                 <ul>
@@ -286,7 +376,7 @@
 
     <!-- HOME / HERO SECTION -->
     <section id="home" class="hero">
-        <!-- 📝 मुख्य हैडिंग को आप यहाँ बदल सकते हैं -->
+        <!-- मुख्य बैनर इमेज 'hero-bg.jpg' को आप गिटहब पर अपलोड कर के बदल सकते हैं -->
         <h1>Shivam International School</h1>
         <p>शिक्षा और अनुशासन के माध्यम से उज्ज्वल भविष्य का निर्माण। हमारे यहाँ अत्याधुनिक सुविधाओं के साथ बच्चों का सर्वांगीण विकास किया जाता है।</p>
         <a href="#contact" class="btn">Admission Open - Contact Us</a>
@@ -294,46 +384,69 @@
 
     <!-- SERVICES / FACILITIES SECTION -->
     <section id="services">
-        <h2 class="section-title">Our Facilities</h2>
+        <h2 class="section-title">Our <span>Facilities</span></h2>
         <div class="services-grid">
             <!-- कार्ड 1 -->
             <div class="service-card">
+                <div class="icon-box">🖥️</div>
                 <h3>Smart Classrooms</h3>
-                <p>आधुनिक तकनीक और प्रोजेक्टर के माध्यम से बच्चों को आसानी से पाठ समझाना।</p>
+                <p>आधुनिक तकनीक और स्मार्ट प्रोजेक्टर के माध्यम से बच्चों को आसानी से डिजिटल विजुअल्स द्वारा पाठ समझाना।</p>
             </div>
             <!-- कार्ड 2 -->
             <div class="service-card">
+                <div class="icon-box">🔬</div>
                 <h3>Science & Computer Lab</h3>
-                <p>प्रैक्टिकल ज्ञान के लिए पूरी तरह सुसज्जित कंप्यूटर और विज्ञान प्रयोगशाला।</p>
+                <p>प्रैक्टिकल ज्ञान को बढ़ावा देने के लिए पूरी तरह से आधुनिक कंप्यूटर और विज्ञान प्रयोगशाला की सुविधा।</p>
             </div>
             <!-- कार्ड 3 -->
             <div class="service-card">
-                <h3>Sports & Games</h3>
-                <p>बच्चों के शारीरिक विकास के लिए खेलकूद और योग की विशेष व्यवस्था।</p>
+                <h3>Sports & Yoga</h3>
+                <p>बच्चों के शारीरिक और मानसिक स्वास्थ्य के विकास के लिए खेलकूद, दौड़ और सुबह के योग की विशेष व्यवस्था।</p>
             </div>
         </div>
     </section>
 
     <!-- GALLERY SECTION -->
-    <section id="gallery" style="background-color: var(--light-bg);">
-        <h2 class="section-title">School Gallery</h2>
-        <div class="gallery-grid">
-            <!-- 🔄 नीचे दी गई इमेज के नाम (img1.jpg, img2.jpg...) को अपनी ओरिजिनल फोटो के नाम से बदल लें -->
-            <div class="gallery-item"><img src="img1.jpg" alt="School Event 1"></div>
-            <div class="gallery-item"><img src="img2.jpg" alt="School Event 2"></div>
-            <div class="gallery-item"><img src="img3.jpg" alt="School Event 3"></div>
-            <div class="gallery-item"><img src="img4.jpg" alt="School Event 4"></div>
-        </div>
-    </section>
+    <div class="gallery-section-wrapper">
+        <section id="gallery">
+            <h2 class="section-title">School <span>Gallery</span></h2>
+            <div class="gallery-grid">
+                <!-- 🔄 यहाँ आप अपनी गिटहब पर अपलोड की गई 6 फोटोज़ के नाम बदल सकते हैं -->
+                <div class="gallery-item">
+                    <img src="img1.jpg" alt="School Event 1">
+                    <div class="gallery-caption">Annual Function / एनुअल फंक्शन</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="img2.jpg" alt="School Event 2">
+                    <div class="gallery-caption">Science Exhibition / विज्ञान प्रदर्शनी</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="img3.jpg" alt="School Event 3">
+                    <div class="gallery-caption">Computer Classes / कंप्यूटर लैब</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="img4.jpg" alt="School Event 4">
+                    <div class="gallery-caption">Sports Day / खेलकूद प्रतियोगिता</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="img5.jpg" alt="School Event 5">
+                    <div class="gallery-caption">Classroom / हमारी कक्षाएं</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="img6.jpg" alt="School Event 6">
+                    <div class="gallery-caption">School Campus / स्कूल परिसर</div>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <!-- CONTACT FORM SECTION -->
     <section id="contact">
-        <h2 class="section-title">Contact Us</h2>
+        <h2 class="section-title">Contact <span>Us</span></h2>
         <div class="contact-container">
-            <!-- 📨 फॉर्म को चालू करने के लिए अपनी 'YOUR_ACCESS_KEY' यहाँ डालें (नीचे निर्देश देखें) -->
             <form action="https://api.web3forms.com/submit" method="POST">
                 
-                <!-- फॉर्म एक्टिवेशन की गुप्त चाबी -->
+                <!-- फॉर्म चालू करने के लिए अपनी Web3Forms की Key यहाँ डालें -->
                 <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
 
                 <div class="form-group">
@@ -346,9 +459,9 @@
                 </div>
                 <div class="form-group">
                     <label for="message">संदेश/पूछताछ (Message)</label>
-                    <textarea id="message" name="message" placeholder="आप क्या जानकारी चाहते हैं, यहाँ लिखें..." required></textarea>
+                    <textarea id="message" name="message" placeholder="आप एडमिशन या अन्य जो भी जानकारी चाहते हैं, यहाँ लिखें..." required></textarea>
                 </div>
-                <button type="submit" class="btn" style="width: 100%;">Submit Message</button>
+                <button type="submit" class="btn" style="width: 100%; border-radius: 8px;">Submit Message</button>
             </form>
         </div>
     </section>
@@ -356,7 +469,7 @@
     <!-- FOOTER -->
     <footer>
         <p>&copy; 2014 Shivam International School. All Rights Reserved.</p>
-        <p style="font-size: 0.8rem; margin-top: 10px; color: #aaa;">Designed by Keshav Tejas</p>
+        <p style="font-size: 0.85rem; margin-top: 12px; color: #ff7b54; font-weight: 600;">Designed by Keshav Tejas</p>
     </footer>
 
 </body>
